@@ -8,20 +8,21 @@ const PRODUCTION_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || PRODUCTION_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || PRODUCTION_KEY
 
-// Demo mode: only if credentials are truly missing
+// Demo mode: if credentials are not set, create a dummy client
 const isDemoMode = !supabaseUrl || !supabaseAnonKey || 
   supabaseUrl === 'https://your-project.supabase.co' ||
   supabaseAnonKey === 'your-anon-key-here' ||
   supabaseUrl === 'undefined' ||
-  supabaseAnonKey === 'undefined'
+  supabaseAnonKey === 'undefined' ||
+  supabaseUrl === PRODUCTION_URL && supabaseAnonKey === PRODUCTION_KEY ? false : true
 
 if (isDemoMode) {
   console.warn('⚠️ DEMO MODE: Supabase not configured. Some features will not work.')
-  console.log('Supabase URL:', supabaseUrl)
-  console.log('Supabase Key:', supabaseAnonKey ? 'Present' : 'Missing')
-} else {
-  console.log('✅ Supabase connected successfully!')
-  console.log('URL:', supabaseUrl)
+  console.log('To enable Supabase:')
+  console.log('1. Go to https://supabase.com and create a project')
+  console.log('2. Get your Project URL and anon key from Settings > API')
+  console.log('3. Update .env file with your credentials')
+  console.log('4. Restart the dev server')
 }
 
 export const supabase = isDemoMode 

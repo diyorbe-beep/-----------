@@ -17,11 +17,11 @@ const isDemoMode = !supabaseUrl || !supabaseAnonKey ||
 
 if (isDemoMode) {
   console.warn('⚠️ DEMO MODE: Supabase not configured. Some features will not work.')
-  console.log('Supabase URL:', supabaseUrl)
-  console.log('Supabase Key:', supabaseAnonKey ? 'Present' : 'Missing')
-} else {
-  console.log('✅ Supabase connected successfully!')
-  console.log('URL:', supabaseUrl)
+  console.log('To enable Supabase:')
+  console.log('1. Go to https://supabase.com and create a project')
+  console.log('2. Get your Project URL and anon key from Settings > API')
+  console.log('3. Update .env file with your credentials')
+  console.log('4. Restart the dev server')
 }
 
 export const supabase = isDemoMode 
